@@ -50,7 +50,7 @@ function HistoryPage() {
                     {new Date(g.updated_at).toLocaleString("en-ZA", { dateStyle: "medium", timeStyle: "short", timeZone: "Africa/Johannesburg" })}
                   </p>
                   <div className="mt-2 flex items-center gap-2">
-                    <Link to={ROUTES[g.type] as any} search={{ id: g.id }}
+                    <Link to={ROUTES[g.type] as any} search={{ id: g.id } as any}
                       className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full bg-secondary hover:bg-accent">
                       <Pencil className="size-3.5" />Open & edit
                     </Link>
