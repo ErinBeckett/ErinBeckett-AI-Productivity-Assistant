@@ -9,24 +9,26 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TasksRouteImport } from './routes/tasks'
-import { Route as NotesRouteImport } from './routes/notes'
-import { Route as EmailRouteImport } from './routes/email'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
+import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app.index'
+import { Route as AuthenticatedAppTasksRouteImport } from './routes/_authenticated/app.tasks'
+import { Route as AuthenticatedAppProfileRouteImport } from './routes/_authenticated/app.profile'
+import { Route as AuthenticatedAppPresentationsRouteImport } from './routes/_authenticated/app.presentations'
+import { Route as AuthenticatedAppNotesRouteImport } from './routes/_authenticated/app.notes'
+import { Route as AuthenticatedAppHistoryRouteImport } from './routes/_authenticated/app.history'
+import { Route as AuthenticatedAppEmailRouteImport } from './routes/_authenticated/app.email'
+import { Route as AuthenticatedAppDiagramsRouteImport } from './routes/_authenticated/app.diagrams'
 
-const TasksRoute = TasksRouteImport.update({
-  id: '/tasks',
-  path: '/tasks',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NotesRoute = NotesRouteImport.update({
-  id: '/notes',
-  path: '/notes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EmailRoute = EmailRouteImport.update({
-  id: '/email',
-  path: '/email',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -34,62 +36,158 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/callback',
+  path: '/callback',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthenticatedAppIndexRoute = AuthenticatedAppIndexRouteImport.update({
+  id: '/app/',
+  path: '/app/',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAppTasksRoute = AuthenticatedAppTasksRouteImport.update({
+  id: '/app/tasks',
+  path: '/app/tasks',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAppProfileRoute = AuthenticatedAppProfileRouteImport.update({
+  id: '/app/profile',
+  path: '/app/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAppPresentationsRoute =
+  AuthenticatedAppPresentationsRouteImport.update({
+    id: '/app/presentations',
+    path: '/app/presentations',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAppNotesRoute = AuthenticatedAppNotesRouteImport.update({
+  id: '/app/notes',
+  path: '/app/notes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAppHistoryRoute = AuthenticatedAppHistoryRouteImport.update({
+  id: '/app/history',
+  path: '/app/history',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAppEmailRoute = AuthenticatedAppEmailRouteImport.update({
+  id: '/app/email',
+  path: '/app/email',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAppDiagramsRoute =
+  AuthenticatedAppDiagramsRouteImport.update({
+    id: '/app/diagrams',
+    path: '/app/diagrams',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/email': typeof EmailRoute
-  '/notes': typeof NotesRoute
-  '/tasks': typeof TasksRoute
+  '/auth': typeof AuthRouteWithChildren
+  '/auth/callback': typeof AuthCallbackRoute
+  '/app/diagrams': typeof AuthenticatedAppDiagramsRoute
+  '/app/email': typeof AuthenticatedAppEmailRoute
+  '/app/history': typeof AuthenticatedAppHistoryRoute
+  '/app/notes': typeof AuthenticatedAppNotesRoute
+  '/app/presentations': typeof AuthenticatedAppPresentationsRoute
+  '/app/profile': typeof AuthenticatedAppProfileRoute
+  '/app/tasks': typeof AuthenticatedAppTasksRoute
+  '/app/': typeof AuthenticatedAppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/email': typeof EmailRoute
-  '/notes': typeof NotesRoute
-  '/tasks': typeof TasksRoute
+  '/auth': typeof AuthRouteWithChildren
+  '/auth/callback': typeof AuthCallbackRoute
+  '/app/diagrams': typeof AuthenticatedAppDiagramsRoute
+  '/app/email': typeof AuthenticatedAppEmailRoute
+  '/app/history': typeof AuthenticatedAppHistoryRoute
+  '/app/notes': typeof AuthenticatedAppNotesRoute
+  '/app/presentations': typeof AuthenticatedAppPresentationsRoute
+  '/app/profile': typeof AuthenticatedAppProfileRoute
+  '/app/tasks': typeof AuthenticatedAppTasksRoute
+  '/app': typeof AuthenticatedAppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/email': typeof EmailRoute
-  '/notes': typeof NotesRoute
-  '/tasks': typeof TasksRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRouteWithChildren
+  '/auth/callback': typeof AuthCallbackRoute
+  '/_authenticated/app/diagrams': typeof AuthenticatedAppDiagramsRoute
+  '/_authenticated/app/email': typeof AuthenticatedAppEmailRoute
+  '/_authenticated/app/history': typeof AuthenticatedAppHistoryRoute
+  '/_authenticated/app/notes': typeof AuthenticatedAppNotesRoute
+  '/_authenticated/app/presentations': typeof AuthenticatedAppPresentationsRoute
+  '/_authenticated/app/profile': typeof AuthenticatedAppProfileRoute
+  '/_authenticated/app/tasks': typeof AuthenticatedAppTasksRoute
+  '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/email' | '/notes' | '/tasks'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/auth/callback'
+    | '/app/diagrams'
+    | '/app/email'
+    | '/app/history'
+    | '/app/notes'
+    | '/app/presentations'
+    | '/app/profile'
+    | '/app/tasks'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/email' | '/notes' | '/tasks'
-  id: '__root__' | '/' | '/email' | '/notes' | '/tasks'
+  to:
+    | '/'
+    | '/auth'
+    | '/auth/callback'
+    | '/app/diagrams'
+    | '/app/email'
+    | '/app/history'
+    | '/app/notes'
+    | '/app/presentations'
+    | '/app/profile'
+    | '/app/tasks'
+    | '/app'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/auth/callback'
+    | '/_authenticated/app/diagrams'
+    | '/_authenticated/app/email'
+    | '/_authenticated/app/history'
+    | '/_authenticated/app/notes'
+    | '/_authenticated/app/presentations'
+    | '/_authenticated/app/profile'
+    | '/_authenticated/app/tasks'
+    | '/_authenticated/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  EmailRoute: typeof EmailRoute
-  NotesRoute: typeof NotesRoute
-  TasksRoute: typeof TasksRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/tasks': {
-      id: '/tasks'
-      path: '/tasks'
-      fullPath: '/tasks'
-      preLoaderRoute: typeof TasksRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/notes': {
-      id: '/notes'
-      path: '/notes'
-      fullPath: '/notes'
-      preLoaderRoute: typeof NotesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/email': {
-      id: '/email'
-      path: '/email'
-      fullPath: '/email'
-      preLoaderRoute: typeof EmailRouteImport
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -99,25 +197,112 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_authenticated/app/': {
+      id: '/_authenticated/app/'
+      path: '/app'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AuthenticatedAppIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/app/tasks': {
+      id: '/_authenticated/app/tasks'
+      path: '/app/tasks'
+      fullPath: '/app/tasks'
+      preLoaderRoute: typeof AuthenticatedAppTasksRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/app/profile': {
+      id: '/_authenticated/app/profile'
+      path: '/app/profile'
+      fullPath: '/app/profile'
+      preLoaderRoute: typeof AuthenticatedAppProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/app/presentations': {
+      id: '/_authenticated/app/presentations'
+      path: '/app/presentations'
+      fullPath: '/app/presentations'
+      preLoaderRoute: typeof AuthenticatedAppPresentationsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/app/notes': {
+      id: '/_authenticated/app/notes'
+      path: '/app/notes'
+      fullPath: '/app/notes'
+      preLoaderRoute: typeof AuthenticatedAppNotesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/app/history': {
+      id: '/_authenticated/app/history'
+      path: '/app/history'
+      fullPath: '/app/history'
+      preLoaderRoute: typeof AuthenticatedAppHistoryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/app/email': {
+      id: '/_authenticated/app/email'
+      path: '/app/email'
+      fullPath: '/app/email'
+      preLoaderRoute: typeof AuthenticatedAppEmailRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/app/diagrams': {
+      id: '/_authenticated/app/diagrams'
+      path: '/app/diagrams'
+      fullPath: '/app/diagrams'
+      preLoaderRoute: typeof AuthenticatedAppDiagramsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAppDiagramsRoute: typeof AuthenticatedAppDiagramsRoute
+  AuthenticatedAppEmailRoute: typeof AuthenticatedAppEmailRoute
+  AuthenticatedAppHistoryRoute: typeof AuthenticatedAppHistoryRoute
+  AuthenticatedAppNotesRoute: typeof AuthenticatedAppNotesRoute
+  AuthenticatedAppPresentationsRoute: typeof AuthenticatedAppPresentationsRoute
+  AuthenticatedAppProfileRoute: typeof AuthenticatedAppProfileRoute
+  AuthenticatedAppTasksRoute: typeof AuthenticatedAppTasksRoute
+  AuthenticatedAppIndexRoute: typeof AuthenticatedAppIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAppDiagramsRoute: AuthenticatedAppDiagramsRoute,
+  AuthenticatedAppEmailRoute: AuthenticatedAppEmailRoute,
+  AuthenticatedAppHistoryRoute: AuthenticatedAppHistoryRoute,
+  AuthenticatedAppNotesRoute: AuthenticatedAppNotesRoute,
+  AuthenticatedAppPresentationsRoute: AuthenticatedAppPresentationsRoute,
+  AuthenticatedAppProfileRoute: AuthenticatedAppProfileRoute,
+  AuthenticatedAppTasksRoute: AuthenticatedAppTasksRoute,
+  AuthenticatedAppIndexRoute: AuthenticatedAppIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+interface AuthRouteChildren {
+  AuthCallbackRoute: typeof AuthCallbackRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthCallbackRoute: AuthCallbackRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  EmailRoute: EmailRoute,
-  NotesRoute: NotesRoute,
-  TasksRoute: TasksRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

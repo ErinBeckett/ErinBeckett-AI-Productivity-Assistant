@@ -1,0 +1,13 @@
+{
+  "name": "Sawubona AI — Workplace Productivity",
+  "short_name": "Sawubona AI",
+  "description": "South African AI workplace assistant: emails, meeting summaries, task plans, presentations and diagrams — saved to your account and available offline.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fef7ed",
+  "theme_color": "#c2185b",
+  "orientation": "any",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
