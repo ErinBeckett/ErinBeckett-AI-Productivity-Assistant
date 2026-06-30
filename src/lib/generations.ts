@@ -57,9 +57,8 @@ export async function saveGeneration(input: GenerationInput): Promise<CachedGene
 }
 
 export async function updateGeneration(id: string, patch: Partial<GenerationInput>): Promise<CachedGeneration> {
-  const dbPatch: Record<string, unknown> = { ...patch };
-  if (patch.metadata !== undefined) dbPatch.metadata = patch.metadata as Json;
-  const { data, error } = await supabase.from("generations").update(dbPatch).eq("id", id).select("*").single();
+  const { data, error } = await supabase.from("generations")
+    .update(patch as never).eq("id", id).select("*").single();
   if (error) throw error;
   const row = data as unknown as CachedGeneration;
   await cachePut(row);
