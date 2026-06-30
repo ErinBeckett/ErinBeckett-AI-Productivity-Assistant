@@ -14,7 +14,75 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      generations: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          metadata: Json
+          title: string
+          type: Database["public"]["Enums"]["generation_type"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          metadata?: Json
+          title: string
+          type: Database["public"]["Enums"]["generation_type"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          metadata?: Json
+          title?: string
+          type?: Database["public"]["Enums"]["generation_type"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string | null
+          id: string
+          institution: string | null
+          learning_style: Database["public"]["Enums"]["learning_style"]
+          onboarded: boolean
+          province: string | null
+          role: Database["public"]["Enums"]["user_role"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          full_name?: string | null
+          id: string
+          institution?: string | null
+          learning_style?: Database["public"]["Enums"]["learning_style"]
+          onboarded?: boolean
+          province?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          institution?: string | null
+          learning_style?: Database["public"]["Enums"]["learning_style"]
+          onboarded?: boolean
+          province?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +91,14 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      generation_type: "email" | "notes" | "tasks" | "presentation" | "diagram"
+      learning_style:
+        | "visual"
+        | "auditory"
+        | "reading_writing"
+        | "kinesthetic"
+        | "multimodal"
+      user_role: "learner" | "educator" | "professional" | "other"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +225,16 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      generation_type: ["email", "notes", "tasks", "presentation", "diagram"],
+      learning_style: [
+        "visual",
+        "auditory",
+        "reading_writing",
+        "kinesthetic",
+        "multimodal",
+      ],
+      user_role: ["learner", "educator", "professional", "other"],
+    },
   },
 } as const
